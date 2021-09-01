@@ -8,6 +8,7 @@ public class DomainproductsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DomainproductsApplication.class, args);
+		//This is spring boot application 
 	}
 
 }
