@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,9 +22,12 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Repository;
 
 import com.domainproduct.model.Product;
+import com.domainproduct.schedulejobs.ScheduleDomainJobs;
 
 @Repository
 public class ProductDAOImpl extends JdbcDaoSupport implements ProductDAO{
+	
+	private static final Logger log = LoggerFactory.getLogger(ProductDAOImpl.class);
 	
 	@Autowired 
 	DataSource dataSource;
@@ -39,6 +44,7 @@ public class ProductDAOImpl extends JdbcDaoSupport implements ProductDAO{
 		String sql = "INSERT INTO product " +
 				"(customer_id,  product_name,  domaintype_id,  start_date, duration_months) VALUES (?, ?, ?, ?, ?)" ;
 		getJdbcTemplate().update(sql, new Object[]{emp.getCustomerId(), emp.getProductName(),emp.getDomain(),emp.getStartDate(),emp.getDurationMonths()});
+		log.info("ProductDAOImpl:insertProduct"); //Need to add detailed data logs
 	}
 	
 	@Override
@@ -59,7 +65,7 @@ public class ProductDAOImpl extends JdbcDaoSupport implements ProductDAO{
 				return products.size();
 			}
 		});
-
+		log.info("ProductDAOImpl:insertProducts"); //Need to add detailed data logs
 	}
 	
 	@Override
@@ -78,18 +84,21 @@ public class ProductDAOImpl extends JdbcDaoSupport implements ProductDAO{
 			 
 			result.add(product);
 		}
-		
+		log.info("ProductDAOImpl:getAllProducts"); //Need to add detailed data logs
 		return result;
 	}
 	
 	
 	@Override
 	public boolean deleteProduct(String customerId, String productName, String domainTypeId) {
+		log.info("ProductDAOImpl:deleteProduct with "+customerId+": "+ productName+ ": "+ domainTypeId);
 		String sql = "delete product where customer_id=? and product_name = ? and  domaintype_id = ?" ;
 		getJdbcTemplate().update(sql, new Object[]{customerId, productName, domainTypeId});
 		return true;//Need to handle failure cases ://TODO
 	}
 		 
+	
+	
 }
 
 
