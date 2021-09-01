@@ -2,7 +2,7 @@ package com.domainproduct.dao.impl;
 
 import java.util.List;
 
-import com.domaintest.model.Product;
+import com.domainproduct.model.Product;
 
 public interface ProductDAO {
 	void insertProduct(Product product);
@@ -12,4 +12,6 @@ public interface ProductDAO {
 	List<Product> getAllProducts();
 
 	Product getProductById(String product);
+	
+	void deleteProduct(String customerId, String productName, String domain);
 }
