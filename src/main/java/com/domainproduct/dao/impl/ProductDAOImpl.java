@@ -89,27 +89,7 @@ public class ProductDAOImpl extends JdbcDaoSupport implements ProductDAO{
 		getJdbcTemplate().update(sql, new Object[]{customerId, productName, domainTypeId});
 		return true;//Need to handle failure cases ://TODO
 	}
-	
-
-	@Override
-	public Product getProductById(String prodId) {
-		String sql = "SELECT * FROM product WHERE product_id = ?";
-
-		return (Product) getJdbcTemplate().queryForObject(sql, new Object[] { prodId }, new RowMapper<Product>() {
-			@Override
-			public Product mapRow(ResultSet rs, int rwNumber) throws SQLException {
-				Product product = new Product();
-				product.setCustomerId(rs.getString("customer_id"));
-				product.setProductName(rs.getString("product_name"));
-				product.setDomain(rs.getString("domaintype_id"));
-				product.setStartDate(rs.getString("start_date"));
-				product.setDurationMonths(rs.getInt("duration_months"));
-				 
-				return product;
-			}
-		});
 		 
-	}
 }
 
 

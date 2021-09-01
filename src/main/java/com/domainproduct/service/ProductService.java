@@ -13,7 +13,5 @@ public interface ProductService {
 
 	List<Product> getAllProducts();
 
-	Product getProductById(String product);
-	
 	void deleteProduct(String customerId, String productName, String domain);
 }

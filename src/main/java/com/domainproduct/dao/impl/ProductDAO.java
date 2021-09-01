@@ -11,7 +11,5 @@ public interface ProductDAO {
 
 	List<Product> getAllProducts();
 
-	Product getProductById(String product);
-	
 	boolean deleteProduct(String customerId, String productName, String domain);
 }

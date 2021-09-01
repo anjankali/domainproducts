@@ -34,14 +34,6 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public Product getProductById(String productId) {
-		Product product = productDao.getProductById(productId);
-		System.out.println(product);
-		
-		return product;
-	}
-	
-	@Override
 	public void deleteProduct(String customerId, String productName, String domainTypeId) {
 		boolean status = productDao.deleteProduct(customerId, productName, domainTypeId);
 		if(status) {
