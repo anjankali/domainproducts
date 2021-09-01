@@ -1,10 +1,12 @@
-package com.domainproduct.dao.impl;
+package com.domainproduct.service;
 
 import java.util.List;
 
 import com.domainproduct.model.Product;
 
-public interface ProductDAO {
+
+public interface ProductService {
+
 	void insertProduct(Product product);
 
 	void insertProducts(List<Product> products);
@@ -13,5 +15,5 @@ public interface ProductDAO {
 
 	Product getProductById(String product);
 	
-	boolean deleteProduct(String customerId, String productName, String domain);
+	void deleteProduct(String customerId, String productName, String domain);
 }

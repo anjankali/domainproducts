@@ -84,9 +84,10 @@ public class ProductDAOImpl extends JdbcDaoSupport implements ProductDAO{
 	
 	
 	@Override
-	public void deleteProduct(String customerId, String productName, String domainTypeId) {
+	public boolean deleteProduct(String customerId, String productName, String domainTypeId) {
 		String sql = "delete product where customer_id=? and product_name = ? and  domaintype_id = ?" ;
 		getJdbcTemplate().update(sql, new Object[]{customerId, productName, domainTypeId});
+		return true;//Need to handle failure cases ://TODO
 	}
 	
 
